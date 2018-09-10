@@ -5,23 +5,12 @@
  * parses commandline arguments
  */
 int main(int argc, char** argv){
-	if(argc ==  4){
-		if(argv[1] == "-e" || argv[1] == "-d"){
-			std::string path{argv[2]};
-			if(path[0] != '/'){
-				path = get_currenct_dir_name() + path;
+	if(argc ==  3){
+			fs::path p{argv[1]};
+			if(p.is_relative()){
+				p = fs::current_path() / p;
 			}
-			if(argv[1] == "-e"){
-				encrypt(path, argv[3]);
-			}
-			else if(argv[1] == "-d"){
-				decrypt(path, argv[3]);
-			}
-		}
-		else{
-			help("Unknown option " + argv[1]);
-			return(-1);
-		}
+			encrypt(p, argv[2]);
 	}
 	else{
 		help("");
@@ -31,7 +20,7 @@ int main(int argc, char** argv){
 /**
  * encrypts a file
  */
-void encrypt(std::string path, const std::string key){
+void encrypt(fs::path path, const std::string key){
 	std::ifstream file {path};
 	std::vector<char> text;
 	std::string buf;
@@ -45,14 +34,19 @@ void encrypt(std::string path, const std::string key){
 		file.close();
 	}
 	else{
-		help("Couldn't open file " + path);
+		help("Couldn't open file " + path.string());
 		exit(-1);
 	}
 	int l = key.length();
 	for(int i = 0; i < text.size(); i++){
 		text[i] = text[i] ^ key[i%l];
 	}
-	path += ".enc";
+	if(path.extension() == ".enc"){
+		path.replace_extension("");
+	}
+	else{
+		path += ".enc";
+	}
 	std::ofstream encfile {path};
 	for(char c : text){
 		encfile << c;
@@ -61,23 +55,15 @@ void encrypt(std::string path, const std::string key){
 }
 
 /**
- * decrypts a file
- */
-void decrypt(char* path, const char* key){
-	
-}
-
-/**
  * prints help to console
  */
 void help(const std::string msg){
-	if(msg = ""){
+	if(msg == ""){
 		std::cout << "\nenc (v0.1) by strmc\n";
 	}
 	else{
 		std::cout <<"\n" <<  msg << "\n";
 	}
 	std::cout << "\nUsage:\n";
-	std::cout << "  \"enc\" \"-e\" pathtofile key\n";
-	std::cout << "  \"enc\" \"-d\" pathtofile key\n";
+	std::cout << "  \"enc\" pathtofile key\n";
 }
