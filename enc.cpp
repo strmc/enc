@@ -1,6 +1,6 @@
 #include "enc.h"
 
-//@TODO mutliple files or dirs
+//@TODO mutliple files or dirs, -r fir recursive mode
 
 const std::string VER = "v1.2";
 
