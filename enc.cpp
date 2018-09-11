@@ -39,6 +39,7 @@ void encrypt(fs::path path, const std::string key){
 	}
 	int l = key.length();
 	for(int i = 0; i < text.size(); i++){
+		std::cout << text[i];
 		if(!(std::isspace(text[i]))){
 			text[i] = text[i] ^ key[i%l];
 		}
