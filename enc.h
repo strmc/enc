@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <experimental/filesystem>
+#include <locale>
 
 namespace fs = std::experimental::filesystem;
 
