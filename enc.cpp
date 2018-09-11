@@ -53,11 +53,25 @@ void encrypt(fs::path path, const std::string key){
 }
 
 /**
+ * encrypts and decrypts a directory recursively
+ */
+void encryptr(fs::path path, const std::string key){
+	if(fs::is_regular_file(path)){
+		encrypt(path,key);
+	}
+	else{
+		for(auto& p : fs::directory_iterator(path){
+			encryptr(p.path, key);
+		}
+	}
+}
+
+/**
  * prints help to console
  */
 void help(const std::string msg){
 	if(msg == ""){
-		std::cout << "\nenc (v1.0) by strmc\n";
+		std::cout << "\nenc (v1.1) by strmc\n";
 	}
 	else{
 		std::cout <<"\n" <<  msg << "\n";
