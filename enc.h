@@ -5,6 +5,7 @@
 #include <fstream>
 #include <experimental/filesystem>
 #include <locale>
+#include <unistd.h>
 
 namespace fs = std::experimental::filesystem;
 

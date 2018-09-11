@@ -1,16 +1,19 @@
 #include "enc.h"
 
+const std::string VER = "v1.2.1";
+
 /**
  * main method
  * parses commandline arguments
  */
 int main(int argc, char** argv){
-	if(argc ==  3){
-			fs::path p{argv[1]};
-			if(p.is_relative()){
-				p = fs::current_path() / p;
+	if(argc ==  2){
+			fs::path path{argv[1]};
+			if(path.is_relative()){
+				path = fs::current_path() / path;
 			}
-			encryptr(p, argv[2]);
+			std::string key = getpass("Enter key:");
+			encryptr(path, key);
 	}
 	else{
 		help("");
@@ -72,11 +75,11 @@ void encryptr(fs::path path, const std::string key){
  */
 void help(const std::string msg){
 	if(msg == ""){
-		std::cout << "\nenc (v1.2) by strmc\n";
+		std::cout << "\nenc ("<< VER << ") by strmc\n";
 	}
 	else{
 		std::cout <<"\n" <<  msg << "\n";
 	}
 	std::cout << "\nUsage:\n";
-	std::cout << "  \"enc\" pathtofileordir key\n";
+	std::cout << "  \"enc\" pathtofileordir\n";
 }
