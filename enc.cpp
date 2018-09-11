@@ -1,6 +1,6 @@
 #include "enc.h"
 
-const std::string VER = "v1.2.1";
+const std::string VER = "v1.1.1";
 
 /**
  * main method
