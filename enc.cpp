@@ -60,7 +60,7 @@ void encrypt(fs::path path, const std::string key){
  */
 void help(const std::string msg){
 	if(msg == ""){
-		std::cout << "\nenc (v0.1) by strmc\n";
+		std::cout << "\nenc (v1.0) by strmc\n";
 	}
 	else{
 		std::cout <<"\n" <<  msg << "\n";
