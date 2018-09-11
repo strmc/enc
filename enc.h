@@ -12,4 +12,6 @@ int main(int, char**);
 
 void encrypt(fs::path, const std::string);
 
+void encryptr(fs::path, const std::string);
+
 void help(const std::string);
