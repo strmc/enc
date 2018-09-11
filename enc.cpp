@@ -23,13 +23,11 @@ int main(int argc, char** argv){
 void encrypt(fs::path path, const std::string key){
 	std::ifstream file {path};
 	std::vector<char> text;
-	std::string buf;
+	char buf;
 	if(file.is_open()){
 		while(!file.eof()){
-			file >> buf;
-			for(char c : buf){
-				text.push_back(c);
-			}
+			file.get(buf);
+			text.push_back(buf);
 		}
 		file.close();
 	}
@@ -40,9 +38,9 @@ void encrypt(fs::path path, const std::string key){
 	int l = key.length();
 	for(int i = 0; i < text.size(); i++){
 		std::cout << text[i];
-		if(!(std::isspace(text[i]))){
+		//if(!(std::isspace(text[i]))){
 			text[i] = text[i] ^ key[i%l];
-		}
+		//}
 	}
 	if(path.extension() == ".enc"){
 		path.replace_extension("");
