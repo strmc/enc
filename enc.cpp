@@ -39,6 +39,7 @@ void encrypt(fs::path path, const std::string key){
 	for(int i = 0; i < text.size(); i++){
 			text[i] = text[i] ^ key[i%l];
 	}
+	fs::remove(path);
 	if(path.extension() == ".enc"){
 		path.replace_extension("");
 	}
