@@ -1,6 +1,8 @@
 #include "enc.h"
 
-const std::string VER = "v1.1.1";
+//@TODO mutliple files or dirs
+
+const std::string VER = "v1.2";
 
 /**
  * main method
