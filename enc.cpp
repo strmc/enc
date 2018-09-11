@@ -10,7 +10,7 @@ int main(int argc, char** argv){
 			if(p.is_relative()){
 				p = fs::current_path() / p;
 			}
-			encrypt(p, argv[2]);
+			encryptr(p, argv[2]);
 	}
 	else{
 		help("");
@@ -60,8 +60,8 @@ void encryptr(fs::path path, const std::string key){
 		encrypt(path,key);
 	}
 	else{
-		for(auto& p : fs::directory_iterator(path){
-			encryptr(p.path, key);
+		for(auto& p : fs::directory_iterator(path)){
+			encryptr(p.path(), key);
 		}
 	}
 }
@@ -77,5 +77,5 @@ void help(const std::string msg){
 		std::cout <<"\n" <<  msg << "\n";
 	}
 	std::cout << "\nUsage:\n";
-	std::cout << "  \"enc\" pathtofile key\n";
+	std::cout << "  \"enc\" pathtofileordir key\n";
 }
